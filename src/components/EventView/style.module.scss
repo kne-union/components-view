@@ -1,0 +1,34 @@
+.event-view {
+  .event-part {
+    :global(.ant-card) {
+      background: transparent;
+    }
+
+    > :global(.ant-card-body) {
+      line-height: 26px;
+      background: var(--bg-color-grey-1);
+      padding: 16px;
+      margin-top: 8px;
+    }
+
+    .event-part {
+      > :global(.ant-card-body) {
+        margin-top: 0;
+        padding: 0;
+      }
+
+      > :global(.ant-card-head) {
+        margin-bottom: 8px;
+      }
+
+      &:not(:last-child):after {
+        content: '';
+        display: block;
+        height: 1px;
+        background: var(--font-color-grey-3);
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
