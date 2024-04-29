@@ -11,7 +11,7 @@ const componentsCoreRemote = {
   remote: 'components-core',
   url: 'https://registry.npmmirror.com',
   tpl: '{{url}}/@kne-components%2f{{remote}}/{{version}}/files/build',
-  defaultVersion: '0.1.17'
+  defaultVersion: '0.1.20'
 };
 
 remoteLoaderPreset({
