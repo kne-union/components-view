@@ -22,7 +22,7 @@ remoteLoaderPreset({
       remote: 'components-iconfont',
       url: 'https://registry.npmmirror.com',
       tpl: '{{url}}/@kne-components%2f{{remote}}/{{version}}/files/build',
-      defaultVersion: '0.1.3'
+      defaultVersion: '0.1.4'
     },
     'components-view':
       process.env.NODE_ENV === 'development'

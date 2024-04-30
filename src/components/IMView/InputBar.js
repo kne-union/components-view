@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, Flex } from 'antd';
 import { createWithRemoteLoader } from '@kne/remote-loader';
+import classnames from 'classnames';
 import style from './style.module.scss';
 
 const InputBar = createWithRemoteLoader({
   modules: ['components-core:Icon']
-})(({ remoteModules, defaultValue, onSubmit }) => {
+})(({ remoteModules, disabled, defaultValue, onSubmit }) => {
   const [value, onChange] = useState(defaultValue);
   const [isPending, setIsPending] = useState(false);
   const [Icon] = remoteModules;
@@ -15,18 +16,33 @@ const InputBar = createWithRemoteLoader({
     result !== false && onChange('');
     setIsPending(false);
   };
+
   return (
-    <Input
-      className={style['input-bar']}
-      value={value}
-      onChange={e => {
-        onChange(e.target.value);
-      }}
-      variant="borderless"
-      placeholder="Enter发送，或点击右侧箭头发送"
-      addonAfter={<Button type="link" loading={isPending} icon={<Icon type="icon-caidan" size={20} />} onClick={handlerSubmit} />}
-      onPressEnter={handlerSubmit}
-    />
+    <Flex
+      className={classnames(style['input-bar'], {
+        [style['disabled']]: disabled
+      })}
+    >
+      <Input.TextArea
+        autoSize={{ minRows: 1, maxRows: 4 }}
+        disabled={disabled}
+        value={value}
+        onChange={e => {
+          onChange(e.target.value);
+        }}
+        variant="borderless"
+        placeholder="Enter发送，或点击右侧箭头发送，Ctrl+Enter换行"
+        onPressEnter={e => {
+          e.preventDefault();
+          if (e.ctrlKey) {
+            onChange(value => value + '\n');
+            return;
+          }
+          return handlerSubmit();
+        }}
+      />
+      <Button type="link" disabled={disabled} loading={isPending} icon={<Icon type="icon-fasongduihua" size={20} />} onClick={handlerSubmit} />
+    </Flex>
   );
 });
 

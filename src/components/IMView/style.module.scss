@@ -1,3 +1,7 @@
+.im-view {
+  height: 100%;
+}
+
 .message {
   padding: 14px 16px;
   background: var(--bg-color-grey-3);
@@ -24,7 +28,26 @@
   border-radius: 8px;
   border: 1px solid var(--primary-color);
 
+  &.disabled {
+    border: 1px solid #cccccc;
+    box-shadow: none;
+    cursor: not-allowed;
+
+    :global(.ant-btn-link) {
+      color: #cccccc;
+
+      &:hover {
+        color: #cccccc;
+      }
+    }
+  }
+
   :global {
+    .ant-btn.ant-btn-icon-only.ant-btn-link {
+      height: 58px;
+      width: 58px;
+    }
+
     .ant-input {
       padding: 18px 20px 18px 18px;
     }
