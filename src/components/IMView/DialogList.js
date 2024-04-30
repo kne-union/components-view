@@ -1,4 +1,4 @@
-import { Flex, Row, Col, Empty } from 'antd';
+import { Flex, Row, Col } from 'antd';
 import { createWithRemoteLoader } from '@kne/remote-loader';
 import get from 'lodash/get';
 import classnames from 'classnames';
@@ -6,10 +6,10 @@ import style from './style.module.scss';
 
 const DialogList = createWithRemoteLoader({
   modules: ['components-core:Image']
-})(({ remoteModules, list = [], empty }) => {
+})(({ remoteModules, list = [], empty = null }) => {
   const [Image] = remoteModules;
   return (
-    <Flex vertical gap={24} className={style['dialog-list']}>
+    <Flex vertical gap={24}>
       {list && list.length > 0
         ? list.map(({ id, user, message }, index) => {
             const isMaster = get(user, 'isMaster');
@@ -33,7 +33,7 @@ const DialogList = createWithRemoteLoader({
               </Row>
             );
           })
-        : empty || <Empty />}
+        : empty}
     </Flex>
   );
 });
