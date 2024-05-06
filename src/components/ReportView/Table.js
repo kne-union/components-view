@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Row, Col, Space, Flex, Divider } from 'antd';
 import groupBy from 'lodash/groupBy';
 import style from './style.module.scss';
+import classNames from 'classnames';
 
 const Table = ({ report }) => {
   const { columns, list, group } = Object.assign(
@@ -62,12 +63,14 @@ const Table = ({ report }) => {
               <Col span={otherSpan}>
                 {list.map((item, index) => {
                   return (
-                    <Row wrap={false} key={index}>
+                    <Row wrap={false} key={index} className={classNames({ [style['table-row-item']]: index !== list?.length - 1 })}>
                       {Array.from(otherColumns.values()).map(({ name }) => {
                         const currentColumn = otherColumns.get(name);
                         return (
                           <Col span={currentColumn.span} key={name}>
-                            <div className={style['table-col-item']}>{currentColumn.hasOwnProperty('valueOf') && typeof currentColumn.valueOf === 'function' ? currentColumn.valueOf(item[name], item) : item[name]}</div>
+                            <div className={classNames(style['table-col-item'], { [style['table-col-item-description']]: name === 'description' })}>
+                              {currentColumn.hasOwnProperty('valueOf') && typeof currentColumn.valueOf === 'function' ? currentColumn.valueOf(item[name], item) : item[name]}
+                            </div>
                           </Col>
                         );
                       })}
