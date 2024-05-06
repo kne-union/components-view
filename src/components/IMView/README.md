@@ -37,7 +37,8 @@ const BaseExample = () => {
   return (
     <div className="outer">
       <div className="inner">
-        <IMView list={[
+        <IMView
+          list={[
             {
               id: 1,
               message: '您好，我是张伟，来自XYZ科技公司的招聘',

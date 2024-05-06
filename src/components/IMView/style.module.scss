@@ -19,7 +19,7 @@
   background: #ffffff;
   flex: 1;
   padding: 24px;
-  //min-height: 590px;
+  max-height: calc(100% - 76px);
 }
 
 .input-bar {
