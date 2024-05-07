@@ -1,0 +1,59 @@
+.page-header {
+  background: #ffffff;
+  padding: 24px 32px;
+  overflow: hidden;
+}
+
+.main {
+  padding-right: 120px;
+}
+
+.icon-outer {
+  transform: translateY(6px);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--font-color);
+}
+
+.info {
+  font-size: 14px;
+  color: var(--font-color-grey-1);
+  white-space: nowrap;
+  line-height: 36px;
+  margin-left: 16px;
+}
+
+.overlay {
+  min-width: 97px !important;
+
+  :global {
+    .ant-btn {
+      border: none;
+      background: transparent !important;
+      width: 100%;
+      height: 100%;
+      padding: 5px 12px;
+
+      &:after {
+        content: normal;
+      }
+    }
+
+    .ant-dropdown-menu-item {
+      padding: 0;
+    }
+  }
+}
+
+.tags {
+  line-height: 20px;
+  font-size: 14px;
+  color: var(--font-color);
+}
+
+.tag-split {
+  color: var(--font-color-grey-2);
+}
