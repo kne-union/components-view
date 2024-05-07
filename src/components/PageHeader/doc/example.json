@@ -1,0 +1,35 @@
+{
+  "isFull": true,
+  "list": [
+    {
+      "title": "基本示例",
+      "description": "展示基本示例",
+      "code": "./base.js",
+      "scope": [
+        {
+          "name": "_PageHeader",
+          "packageName": "@components/PageHeader"
+        },
+        {
+          "name": "space",
+          "packageName": "antd/lib/space"
+        }
+      ]
+    },
+    {
+      "title": "在Layout里面使用",
+      "description": "展示在Layout里面使用",
+      "code": "./layout.js",
+      "scope": [
+        {
+          "name": "_PageHeader",
+          "packageName": "@components/PageHeader"
+        },
+        {
+          "name": "remoteLoader",
+          "packageName": "@kne/remote-loader"
+        }
+      ]
+    }
+  ]
+}
