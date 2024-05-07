@@ -307,6 +307,9 @@ const BaseExample = () => {
             ]
           }}
         />
+        <ReportView title="结论与建议" type="info">
+          Info area
+        </ReportView>
       </Space>
     </div>
   );
