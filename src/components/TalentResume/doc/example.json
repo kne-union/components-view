@@ -32,6 +32,14 @@
         {
           "name": "_remoteLoader",
           "packageName": "@kne/remote-loader"
+        },
+        {
+          "name": "_reachFetch",
+          "packageName": "@kne/react-fetch"
+        },
+        {
+          "name": "_lodash",
+          "packageName": "lodash"
         }
       ]
     }

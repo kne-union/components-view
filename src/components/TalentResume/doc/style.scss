@@ -1,0 +1,11 @@
+.list-card-item {
+  &:hover {
+    .info-extra {
+      display: block;
+    }
+  }
+}
+
+.info-extra {
+  display: none;
+}

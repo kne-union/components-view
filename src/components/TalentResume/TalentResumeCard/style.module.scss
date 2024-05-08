@@ -141,12 +141,17 @@
   }
   .index-area-wrap {
     padding-left: 0 !important;
-    :global {
-      .ant-checkbox {
-        padding: 10px 5px 10px 10px;
-      }
-      .ant-checkbox-checked::after {
-        border: none !important;
+    .index-area-checkbox {
+      :global {
+        .ant-checkbox {
+          padding: 10px 5px 10px 10px;
+        }
+        .ant-checkbox-checked::after {
+          border: none !important;
+        }
+        .ant-checkbox-inner:after {
+          transform: rotate(45deg) scale(1) translate(10%, -100%);
+        }
       }
     }
   }

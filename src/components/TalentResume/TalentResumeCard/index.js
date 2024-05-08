@@ -1,7 +1,7 @@
 import { createWithRemoteLoader } from '@kne/remote-loader';
 import get from 'lodash/get';
 import { isNil } from 'lodash';
-import { Col, Divider, Row, Space, Timeline, Typography } from 'antd';
+import { Checkbox, Col, Divider, Row, Space, Timeline, Typography } from 'antd';
 import dayjs from 'dayjs';
 import classnames from 'classnames';
 
@@ -9,15 +9,24 @@ import style from './style.module.scss';
 
 const TalentResumeCard = createWithRemoteLoader({
   modules: ['Highlight', 'Image', 'Icon', 'Enum', 'Common@AddressEnum']
-})(({ remoteModules, item, indexArea, infoExtra, onClick, extraResumeNode, showNode, rightActionsArea, footer }) => {
+})(({ remoteModules, item, showCheckbox, checkedList, onChange, infoExtra, onClick, extraResumeNode, showNode, rightActionsArea, footer, cardClassName }) => {
   const [Highlight, Image, Icon, Enum, AddressEnum] = remoteModules;
 
   return (
-    <div className={classnames(style['resume-card'], 'resume-card')}>
-      <Row gutter={16} className={classnames(style['resume-card-inner'], 'resume-card-inner')} onClick={onClick} wrap={false}>
+    <div className={classnames(style['resume-card'], 'resume-card', cardClassName)}>
+      <Row gutter={16} className={classnames(style['resume-card-inner'], 'resume-card-inner')} onClick={() => onClick?.(item)} wrap={false}>
         <Col className={style['index-area-wrap']}>
           <Space align="center">
-            {indexArea}
+            {showCheckbox && (
+              <Checkbox
+                className={style['index-area-checkbox']}
+                checked={(checkedList || []).indexOf(item.id) > -1}
+                onChange={e => onChange?.(e, item)}
+                onClick={e => {
+                  e.stopPropagation();
+                }}
+              />
+            )}
             <Image.Avatar size={50} id={get(item, 'photo')} shape="circle" gender={get(item, 'gender')} />
           </Space>
         </Col>
@@ -25,16 +34,16 @@ const TalentResumeCard = createWithRemoteLoader({
           <Row align="bottom" className={style['row-top']} justify="space-between">
             <Col>
               <Space size={12} align={'center'}>
-                <span className={style.name}>
+                <span className={style['name']}>
                   <Highlight>{get(item, 'name') || '姓名缺失'}</Highlight>
                 </span>
                 <Space align={'center'} size={0}>
-                  {infoExtra}
+                  {infoExtra && infoExtra(item)}
                 </Space>
               </Space>
             </Col>
             <Col className={style['fixed-button']}>
-              <Space size={16}>{rightActionsArea}</Space>
+              <Space size={16}>{rightActionsArea && rightActionsArea(item)}</Space>
             </Col>
           </Row>
           <Row wrap={false} className={style['row-center']}>
@@ -176,8 +185,8 @@ const TalentResumeCard = createWithRemoteLoader({
               )}
             </Col>
           </Row>
-          {footer}
-          {showNode && extraResumeNode}
+          {footer && footer(item)}
+          {showNode && extraResumeNode?.(item)}
         </Col>
       </Row>
     </div>
