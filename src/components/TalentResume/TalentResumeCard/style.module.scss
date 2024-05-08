@@ -1,12 +1,10 @@
 .resume-card {
   white-space: nowrap;
-  cursor: pointer;
   padding: 0 16px;
   position: relative;
   border: none;
   line-height: 20px;
-  .resume-card-border {
-    border-bottom: solid 1px var(--bg-color-grey-3);
+  .resume-card-inner {
     padding: 24px 0 28px;
     margin: 0 !important;
   }
@@ -136,13 +134,6 @@
     height: 80px;
     border-radius: 40px;
     border: 1px solid #ffffff;
-  }
-
-  &:hover {
-    box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.1);
-  }
-  &:last-child {
-    margin-bottom: 0;
   }
   :global(.ant-divider-horizontal) {
     margin-top: 24px;

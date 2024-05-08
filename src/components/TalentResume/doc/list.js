@@ -1,37 +1,3 @@
-
-# TalentResume
-
-
-### 概述
-
-人才简历
-
-
-### 示例(全屏)
-
-#### 示例代码
-
-- TalentResumeCard
-- 人才简历卡片
-- _TalentResume(@components/TalentResume),_mockData(./mock/talent-resume.json)
-
-```jsx
-const { TalentResumeCard } = _TalentResume;
-const { default: mockData } = _mockData;
-
-const BaseExample = () => {
-  return <TalentResumeCard item={mockData.data} />;
-};
-
-render(<BaseExample />);
-
-```
-
-- TalentResumeList
-- 人才简历列表
-- _TalentResume(@components/TalentResume),_mockData(./mock/talent-resume-list.json),_remoteLoader(@kne/remote-loader)
-
-```jsx
 const { TalentResumeList } = _TalentResume;
 const { default: mockData } = _mockData;
 const { createWithRemoteLoader } = _remoteLoader;
@@ -74,12 +40,3 @@ const BaseExample = createWithRemoteLoader({
 });
 
 render(<BaseExample />);
-
-```
-
-
-### API
-
-|属性名|说明|类型|默认值|
-|  ---  | ---  | --- | --- |
-

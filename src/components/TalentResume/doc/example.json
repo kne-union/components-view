@@ -1,9 +1,9 @@
 {
-  "isFull": false,
+  "isFull": true,
   "list": [
     {
-      "title": "这里填写示例标题",
-      "description": "这里填写示例说明",
+      "title": "TalentResumeCard",
+      "description": "人才简历卡片",
       "code": "./base.js",
       "scope": [
         {
@@ -13,6 +13,25 @@
         {
           "name": "_mockData",
           "packageName": "./mock/talent-resume.json"
+        }
+      ]
+    },
+    {
+      "title": "TalentResumeList",
+      "description": "人才简历列表",
+      "code": "./list.js",
+      "scope": [
+        {
+          "name": "_TalentResume",
+          "packageName": "@components/TalentResume"
+        },
+        {
+          "name": "_mockData",
+          "packageName": "./mock/talent-resume-list.json"
+        },
+        {
+          "name": "_remoteLoader",
+          "packageName": "@kne/remote-loader"
         }
       ]
     }

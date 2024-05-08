@@ -14,7 +14,7 @@ const TalentResumeCard = createWithRemoteLoader({
 
   return (
     <div className={classnames(style['resume-card'], 'resume-card')}>
-      <Row gutter={16} className={classnames(style['resume-card-border'])} onClick={onClick} wrap={false}>
+      <Row gutter={16} className={classnames(style['resume-card-inner'], 'resume-card-inner')} onClick={onClick} wrap={false}>
         <Col className={style['index-area-wrap']}>
           <Space align="center">
             {indexArea}
@@ -96,74 +96,83 @@ const TalentResumeCard = createWithRemoteLoader({
             </Col>
             <Col flex={1} className={get(item, 'works.length') > 1 ? style['work-time-line'] : ''}>
               {get(item, `works[0]`) && (
-                <Timeline>
-                  <Timeline.Item className={!get(item, `works[1]`) && style['without-time-line']}>
-                    <Row align="middle" wrap={false}>
-                      <Col className={style['company-time']}>
-                        {get(item, `works[0].startTime`) && (
-                          <>
-                            {dayjs(get(item, `works[0].startTime`)).format('YYYY.MM')}-{dayjs(get(item, `works[0].endTime`)).format('YYYY.MM') || '至今'}
-                          </>
-                        )}
-                      </Col>
-                      <Col flex={1} className={style['work-box']}>
-                        <div className={style['work-company']}>
-                          <Typography.Text
-                            ellipsis={{
-                              tooltip: true
-                            }}
-                          >
-                            <Highlight>{get(item, `works[0].company`)}</Highlight>
-                          </Typography.Text>
-                        </div>
-                        <div className={style['work-position']}>
-                          <Typography.Text
-                            ellipsis={{
-                              tooltip: true
-                            }}
-                          >
-                            <Highlight>{get(item, `works[0].position`)}</Highlight>
-                          </Typography.Text>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Timeline.Item>
-                </Timeline>
+                <Timeline
+                  items={[
+                    {
+                      className: !get(item, `works[1]`) && style['without-time-line'],
+                      children: (
+                        <Row align="middle" wrap={false}>
+                          <Col className={style['company-time']}>
+                            {get(item, `works[0].startTime`) && (
+                              <>
+                                {dayjs(get(item, `works[0].startTime`)).format('YYYY.MM')}-{get(item, `works[0].endTime`) ? dayjs(get(item, `works[0].endTime`)).format('YYYY.MM') : '至今'}
+                              </>
+                            )}
+                          </Col>
+                          <Col flex={1} className={style['work-box']}>
+                            <div className={style['work-company']}>
+                              <Typography.Text
+                                ellipsis={{
+                                  tooltip: true
+                                }}
+                              >
+                                <Highlight>{get(item, `works[0].company`)}</Highlight>
+                              </Typography.Text>
+                            </div>
+                            <div className={style['work-position']}>
+                              <Typography.Text
+                                ellipsis={{
+                                  tooltip: true
+                                }}
+                              >
+                                <Highlight>{get(item, `works[0].position`)}</Highlight>
+                              </Typography.Text>
+                            </div>
+                          </Col>
+                        </Row>
+                      )
+                    }
+                  ]}
+                />
               )}
               {get(item, `works[1]`) && (
-                <Timeline>
-                  <Timeline.Item>
-                    <Row align="middle" wrap={false}>
-                      <Col className={style['company-time']}>
-                        {get(item, `works[1].startTime`) && (
-                          <>
-                            {dayjs(get(item, `works[0].startTime`)).format('YYYY.MM')}-{dayjs(get(item, `works[0].endTime`)).format('YYYY.MM') || '至今'}
-                          </>
-                        )}
-                      </Col>
-                      <Col flex={1} className={style['work-box']}>
-                        <div className={style['work-company']}>
-                          <Typography.Text
-                            ellipsis={{
-                              tooltip: true
-                            }}
-                          >
-                            <Highlight>{get(item, `works[1].company`)}</Highlight>
-                          </Typography.Text>
-                        </div>
-                        <div className={style['work-position']}>
-                          <Typography.Text
-                            ellipsis={{
-                              tooltip: true
-                            }}
-                          >
-                            <Highlight>{get(item, `works[1].position`)}</Highlight>
-                          </Typography.Text>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Timeline.Item>
-                </Timeline>
+                <Timeline
+                  items={[
+                    {
+                      children: (
+                        <Row align="middle" wrap={false}>
+                          <Col className={style['company-time']}>
+                            {get(item, `works[1].startTime`) && (
+                              <>
+                                {dayjs(get(item, `works[1].startTime`)).format('YYYY.MM')}-{get(item, `works[1].endTime`) ? dayjs(get(item, `works[1].endTime`)).format('YYYY.MM') : '至今'}
+                              </>
+                            )}
+                          </Col>
+                          <Col flex={1} className={style['work-box']}>
+                            <div className={style['work-company']}>
+                              <Typography.Text
+                                ellipsis={{
+                                  tooltip: true
+                                }}
+                              >
+                                <Highlight>{get(item, `works[1].company`)}</Highlight>
+                              </Typography.Text>
+                            </div>
+                            <div className={style['work-position']}>
+                              <Typography.Text
+                                ellipsis={{
+                                  tooltip: true
+                                }}
+                              >
+                                <Highlight>{get(item, `works[1].position`)}</Highlight>
+                              </Typography.Text>
+                            </div>
+                          </Col>
+                        </Row>
+                      )
+                    }
+                  ]}
+                />
               )}
             </Col>
           </Row>
