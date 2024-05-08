@@ -1,11 +1,15 @@
 .list-card-item {
   &:hover {
+    .fixed-button,
     .info-extra {
-      display: block;
+      visibility: visible;
+      opacity: 1;
     }
   }
 }
 
+.fixed-button,
 .info-extra {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
 }

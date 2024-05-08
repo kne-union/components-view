@@ -42,7 +42,7 @@ const TalentResumeCard = createWithRemoteLoader({
                 </Space>
               </Space>
             </Col>
-            <Col className={style['fixed-button']}>
+            <Col className={classnames(style['fixed-button'], 'fixed-button')}>
               <Space size={16}>{rightActionsArea && rightActionsArea(item)}</Space>
             </Col>
           </Row>

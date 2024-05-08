@@ -40,6 +40,10 @@
         {
           "name": "_lodash",
           "packageName": "lodash"
+        },
+        {
+          "name": "_antd",
+          "packageName": "antd"
         }
       ]
     }
