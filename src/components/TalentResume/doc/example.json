@@ -2,6 +2,25 @@
   "isFull": true,
   "list": [
     {
+      "title": "CandidateCard",
+      "description": "候选人详情卡片",
+      "code": "./candidate-card.js",
+      "scope": [
+        {
+          "name": "_TalentResume",
+          "packageName": "@components/TalentResume"
+        },
+        {
+          "name": "_mockData",
+          "packageName": "./mock/talent-resume.json"
+        },
+        {
+          "name": "_lodash",
+          "packageName": "lodash"
+        }
+      ]
+    },
+    {
       "title": "TalentResumeCard",
       "description": "人才简历卡片",
       "code": "./base.js",

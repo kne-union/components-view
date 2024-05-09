@@ -1,0 +1,26 @@
+.candidate-card {
+  background-color: #fff;
+  padding: 24px 16px;
+}
+.name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222222;
+  line-height: 22px;
+  max-width: 233px;
+  word-break: break-all;
+  display: inline-block;
+}
+.id {
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  color: #999999;
+  line-height: 16px;
+}
+.avatar {
+  margin-right: 16px;
+}
+
+.skills-tags {
+  padding-left: 102px;
+}
