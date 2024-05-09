@@ -9,27 +9,6 @@
 
 ### 示例(全屏)
 
-
-#### 示例样式
-
-```scss
-.list-card-item {
-  &:hover {
-    .fixed-button,
-    .info-extra {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
-}
-
-.fixed-button,
-.info-extra {
-  visibility: hidden;
-  opacity: 0;
-}
-```
-
 #### 示例代码
 
 - TalentResumeCard
@@ -41,7 +20,28 @@ const { TalentResumeCard } = _TalentResume;
 const { default: mockData } = _mockData;
 
 const BaseExample = () => {
-  return <TalentResumeCard item={mockData.data} />;
+  return (
+    <TalentResumeCard
+      item={mockData.data}
+      actionOptions={[
+        {
+          children: '新建'
+        },
+        {
+          children: '操作1'
+        },
+        {
+          children: '操作2'
+        },
+        {
+          children: '操作3'
+        },
+        {
+          children: '操作4'
+        }
+      ]}
+    />
+  );
 };
 
 render(<BaseExample />);
@@ -60,6 +60,16 @@ const { withFetch } = _reachFetch;
 const { get } = _lodash;
 const { Button, Space } = _antd;
 const { useCallback, useState } = React;
+
+const api = {
+  loader: () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('哈哈哈哈');
+      }, 1000);
+    });
+  }
+};
 
 const ListInner = createWithRemoteLoader({
   modules: ['StateTag']
@@ -88,17 +98,33 @@ const ListInner = createWithRemoteLoader({
         showCheckbox
         checkedList={checkedList.map(item => get(item, 'id'))}
         onChange={onChange}
-        cardClassName={'list-card-item'}
         onClick={item => {
           alert(`点击了 ID 为 ${get(item, 'id')} 的候选人`);
         }}
         infoExtra={item => <div className={'info-extra'}>ID: {get(item, 'id')}</div>}
-        rightActionsArea={item => (
-          <>
-            <Button>加入</Button>
-            <Button type={'primary'}>移除</Button>
-          </>
-        )}
+        actionOptions={[
+          {
+            children: '加入'
+          },
+          {
+            type: 'ModalButton',
+            api,
+            modalProps: ({ data }) => ({
+              title: '测试弹窗',
+              children: data
+            }),
+            children: '弹窗操作'
+          },
+          {
+            children: '移除'
+          },
+          {
+            children: '操作1'
+          },
+          {
+            children: '操作2'
+          }
+        ]}
         footer={item => (
           <Space wrap>
             {get(item, 'tags.skillsTags', []).map(({ tagName }) => (

@@ -6,6 +6,16 @@ const { get } = _lodash;
 const { Button, Space } = _antd;
 const { useCallback, useState } = React;
 
+const api = {
+  loader: () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('哈哈哈哈');
+      }, 1000);
+    });
+  }
+};
+
 const ListInner = createWithRemoteLoader({
   modules: ['StateTag']
 })(
@@ -33,17 +43,33 @@ const ListInner = createWithRemoteLoader({
         showCheckbox
         checkedList={checkedList.map(item => get(item, 'id'))}
         onChange={onChange}
-        cardClassName={'list-card-item'}
         onClick={item => {
           alert(`点击了 ID 为 ${get(item, 'id')} 的候选人`);
         }}
         infoExtra={item => <div className={'info-extra'}>ID: {get(item, 'id')}</div>}
-        rightActionsArea={item => (
-          <>
-            <Button>加入</Button>
-            <Button type={'primary'}>移除</Button>
-          </>
-        )}
+        actionOptions={[
+          {
+            children: '加入'
+          },
+          {
+            type: 'ModalButton',
+            api,
+            modalProps: ({ data }) => ({
+              title: '测试弹窗',
+              children: data
+            }),
+            children: '弹窗操作'
+          },
+          {
+            children: '移除'
+          },
+          {
+            children: '操作1'
+          },
+          {
+            children: '操作2'
+          }
+        ]}
         footer={item => (
           <Space wrap>
             {get(item, 'tags.skillsTags', []).map(({ tagName }) => (

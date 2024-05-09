@@ -4,6 +4,19 @@
   position: relative;
   border: none;
   line-height: 20px;
+  &:hover {
+    .fixed-button,
+    .info-extra {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .fixed-button,
+  .info-extra {
+    visibility: hidden;
+    opacity: 0;
+  }
   .resume-card-inner {
     padding: 24px 0 28px;
     margin: 0 !important;
