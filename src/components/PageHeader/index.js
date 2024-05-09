@@ -1,24 +1,16 @@
-import { Space, Row, Col, Button, Dropdown } from 'antd';
+import { Space, Row, Col } from 'antd';
 import classnames from 'classnames';
 import importMessages from './locale';
 import style from './style.module.scss';
 import { useMemo } from 'react';
 import { createWithRemoteLoader } from '@kne/remote-loader';
+import RightOptionGroup from '../RightOptionGroup';
 
 export const PageHeaderInner = createWithRemoteLoader({
-  modules: ['components-core:Icon', 'components-core:LoadingButton', 'components-core:ConfirmButton', 'components-core:Modal@ModalButton', 'components-core:FormInfo@FormModalButton', 'components-core:Modal@TabsModalButton']
-})(({ remoteModules, className, title, iconType, info, tags, tagSplit, tagClassName, hasPrimary, showCount, options, getPopupContainer }) => {
-  const [Icon, LoadingButton, ConfirmButton, ModalButton, FormModalButton, TabsModalButton] = remoteModules;
-  const mapping = useMemo(() => {
-    return {
-      Button,
-      LoadingButton,
-      ConfirmButton,
-      ModalButton,
-      FormModalButton,
-      TabsModalButton
-    };
-  }, [LoadingButton, ConfirmButton, ModalButton, FormModalButton, TabsModalButton]);
+  modules: ['Icon']
+})(({ remoteModules, className, title, iconType, info, tags, tagSplit, tagClassName, hasPrimary, showCount, options, getPopupContainer, showDropDownMenuBtn }) => {
+  const [Icon] = remoteModules;
+
   const _options = useMemo(() => {
     return options
       ? (options || []).filter(item => {
@@ -46,34 +38,7 @@ export const PageHeaderInner = createWithRemoteLoader({
         </Col>
         {_options && (
           <Col>
-            <Space>
-              {_options.slice(0, showCount).map(({ key, type, hidden, ...item }, index) => {
-                const ButtonComponent = (type && mapping?.[type]) || Button;
-                return hidden ? null : <ButtonComponent {...item} key={key || index} size="middle" type={hasPrimary && index === 0 ? 'primary' : 'default'} />;
-              })}
-              {_options.length > showCount && (
-                <Dropdown
-                  getPopupContainer={getPopupContainer}
-                  overlayClassName={style['overlay']}
-                  menu={{
-                    items: _options.slice(showCount).map(({ type, key, ...item }, index) => {
-                      const ButtonComponent = (type && mapping?.[type]) || Button;
-                      return {
-                        key: key || index,
-                        label: <ButtonComponent {...item} size="middle" type="default" />
-                      };
-                    })
-                  }}
-                >
-                  <Button>
-                    {/*{showDropDownMenuBtn ? (
-                        <FormattedMessage id="more" moduleName="PageHeader" />
-                      ) : '更多'}*/}
-                    <Icon size={12} type="icon-arrow-thin-down" />
-                  </Button>
-                </Dropdown>
-              )}
-            </Space>
+            <RightOptionGroup options={_options} hasPrimary={hasPrimary} showCount={showCount} getPopupContainer={getPopupContainer} showDropDownMenuBtn={showDropDownMenuBtn} />
           </Col>
         )}
       </Row>
@@ -106,19 +71,14 @@ const PageHeader = createWithRemoteLoader({
 });
 
 PageHeaderInner.defaultProps = {
-  showCount: 3,
-  hasPrimary: true,
   tagSplit: <span className={style['tag-split']}>|</span>,
   tagClassName: '',
   showDropDownMenuBtn: false
 };
 
 PageHeader.defaultProps = {
-  showCount: 3,
-  hasPrimary: true,
   tagSplit: <span className={style['tag-split']}>|</span>,
-  tagClassName: '',
-  showDropDownMenuBtn: true
+  tagClassName: ''
 };
 
 export default PageHeader;

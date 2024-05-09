@@ -6,11 +6,24 @@ import dayjs from 'dayjs';
 import classnames from 'classnames';
 
 import style from './style.module.scss';
+import { useMemo } from 'react';
+import RightOptionGroup from '../../RightOptionGroup';
 
 const TalentResumeCard = createWithRemoteLoader({
   modules: ['Highlight', 'Image', 'Icon', 'Enum', 'Common@AddressEnum']
-})(({ remoteModules, item, showCheckbox, checkedList, onChange, infoExtra, onClick, extraResumeNode, showNode, rightActionsArea, footer, cardClassName }) => {
+})(({ remoteModules, item, showCheckbox, checkedList, onChange, infoExtra, onClick, extraResumeNode, showNode, actionOptions, footer, cardClassName, hasPrimary, showCount, getPopupContainer }) => {
   const [Highlight, Image, Icon, Enum, AddressEnum] = remoteModules;
+
+  const _options = useMemo(() => {
+    return actionOptions
+      ? (actionOptions || []).filter(item => {
+          if (typeof item.display === 'function') {
+            return item.display();
+          }
+          return item.display !== false;
+        })
+      : null;
+  }, [actionOptions]);
 
   return (
     <div className={classnames(style['resume-card'], 'resume-card', cardClassName)}>
@@ -42,8 +55,8 @@ const TalentResumeCard = createWithRemoteLoader({
                 </Space>
               </Space>
             </Col>
-            <Col className={classnames(style['fixed-button'], 'fixed-button')}>
-              <Space size={16}>{rightActionsArea && rightActionsArea(item)}</Space>
+            <Col className={classnames(style['fixed-button'], 'fixed-button')} onClick={e => e.stopPropagation()}>
+              <RightOptionGroup options={_options} hasPrimary={hasPrimary} showCount={showCount} getPopupContainer={getPopupContainer} />
             </Col>
           </Row>
           <Row wrap={false} className={style['row-center']}>
@@ -192,5 +205,10 @@ const TalentResumeCard = createWithRemoteLoader({
     </div>
   );
 });
+
+TalentResumeCard.defaultProps = {
+  showCount: 2,
+  actionOptions: []
+};
 
 export default TalentResumeCard;
