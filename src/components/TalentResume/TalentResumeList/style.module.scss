@@ -1,0 +1,15 @@
+.resume-list {
+  :global {
+    .resume-card-inner {
+      border-bottom: solid 1px var(--bg-color-grey-3);
+    }
+  }
+
+  .resume-card-wrap {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

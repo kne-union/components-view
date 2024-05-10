@@ -1,0 +1,336 @@
+{
+  "code": 0,
+  "data": {
+    "id": "310468818298208256",
+    "channel": null,
+    "otherChannelName": null,
+    "createWay": null,
+    "photo": null,
+    "name": "李3",
+    "gender": "M",
+    "birth": "2024-04-06T00:00:00.000+08:00",
+    "age": 22,
+    "birthFromAge": null,
+    "degree": 40,
+    "currentLocation": "010",
+    "phoneRegionCode": null,
+    "phone": null,
+    "phoneCheck": null,
+    "virtualPhone": null,
+    "virtualPhoneTime": null,
+    "otherPhoneRegionCode": null,
+    "otherPhone": null,
+    "otherPhoneCheck": null,
+    "email": null,
+    "otherEmail": null,
+    "wechat": null,
+    "cardType": null,
+    "card": null,
+    "nativePlace": null,
+    "marital": null,
+    "race": null,
+    "nationality": null,
+    "politicalStatus": null,
+    "height": null,
+    "weight": null,
+    "currentStatus": null,
+    "currentType": null,
+    "currentSalary": null,
+    "currentSalaryType": null,
+    "currentSalaryMin": null,
+    "currentSalaryMax": null,
+    "expectedSalary": null,
+    "expectedSalaryMin": null,
+    "expectedSalaryMax": null,
+    "expectedSalaryType": null,
+    "selfRemark": null,
+    "otherInfo": null,
+    "expectedLocations": null,
+    "expectedWorkTitle": null,
+    "expectedIndustry": null,
+    "expectedPositionType": null,
+    "workExperience": 4,
+    "workStartTime": "2019-09-01T00:00:00.000+08:00",
+    "works": [
+      {
+        "id": "310468818306596864",
+        "company": "华住酒店集团",
+        "industry": null,
+        "industryCode": null,
+        "type": null,
+        "scale": null,
+        "position": "1111111111",
+        "functionCode": null,
+        "department": "研发中心",
+        "rank": null,
+        "salary": null,
+        "salaryType": null,
+        "salaryMax": null,
+        "salaryMin": null,
+        "reportTo": null,
+        "subordinatesCount": null,
+        "description": "华住酒店集团华住酒店集团华住酒店集团华住酒店集团华住酒店集团华住酒店集团华住酒店集团",
+        "departure": null,
+        "startTime": "2020-11-01T00:00:00.000+08:00",
+        "endTime": "2022-04-01T00:00:00.000+08:00",
+        "soFar": null,
+        "top500": null,
+        "isJoin": null,
+        "isOn": false
+      },
+      {
+        "id": "310468818306596865",
+        "company": "上海纳客宝信息有限公司",
+        "industry": null,
+        "industryCode": null,
+        "type": null,
+        "scale": null,
+        "position": "11111111",
+        "functionCode": null,
+        "department": null,
+        "rank": null,
+        "salary": null,
+        "salaryType": null,
+        "salaryMax": null,
+        "salaryMin": null,
+        "reportTo": null,
+        "subordinatesCount": null,
+        "description": "华住酒店集团华住酒店集团华住酒店集团华住酒店集团华住酒店集团华住酒店集团华住酒店集团",
+        "departure": null,
+        "startTime": "2019-09-01T00:00:00.000+08:00",
+        "endTime": "2020-10-01T00:00:00.000+08:00",
+        "soFar": null,
+        "top500": null,
+        "isJoin": null,
+        "isOn": false
+      }
+    ],
+    "projects": null,
+    "educations": [
+      {
+        "id": "310468818306596871",
+        "school": "北京理工大学",
+        "degree": 40,
+        "subject": "计算机科学与技术",
+        "unifiedEnrolment": "Y",
+        "startTime": "2017-01-01T00:00:00.000+08:00",
+        "endTime": "2020-01-01T00:00:00.000+08:00",
+        "soFar": false,
+        "is985": true,
+        "is211": true,
+        "two": true,
+        "isStudyAbroad": null,
+        "qs100": null
+      }
+    ],
+    "skills": null,
+    "languages": null,
+    "trainings": null,
+    "certificates": null,
+    "resumeFiles": null,
+    "createdBy": {
+      "coId": 1,
+      "orgId": 103,
+      "uid": 107,
+      "appId": 1,
+      "termId": 192410959
+    },
+    "folderIds": null,
+    "createdAt": null,
+    "updatedAt": null,
+    "tags": {
+      "industries": [],
+      "posTags": [
+        {
+          "tagName": "测试工程师",
+          "tagWeight": 1.5188269114494324
+        },
+        {
+          "tagName": "软件测试",
+          "tagWeight": 1.5188269114494324
+        },
+        {
+          "tagName": "软件测试工程师",
+          "tagWeight": 0.661026120185852
+        },
+        {
+          "tagName": "功能测试",
+          "tagWeight": 0.6060913467407225
+        },
+        {
+          "tagName": "app测试工程师",
+          "tagWeight": 0.5783346033096313
+        },
+        {
+          "tagName": "手机测试",
+          "tagWeight": 0.5759783363342286
+        },
+        {
+          "tagName": "app软件测试工程师",
+          "tagWeight": 0.5724674320220947
+        },
+        {
+          "tagName": "测试开发工程师",
+          "tagWeight": 0.5622772908210755
+        },
+        {
+          "tagName": "功能测试工程师",
+          "tagWeight": 0.5562388014793396
+        },
+        {
+          "tagName": "手机软件测试工程师",
+          "tagWeight": 0.5554150629043579
+        }
+      ],
+      "posTypes": [
+        {
+          "tagName": "软件测试",
+          "tagWeight": 3.8688427126077936
+        },
+        {
+          "tagName": "系统测试",
+          "tagWeight": 0.911420653068982
+        },
+        {
+          "tagName": "软件工程师",
+          "tagWeight": 0.8423528547042732
+        },
+        {
+          "tagName": "测试工程师",
+          "tagWeight": 0.7617117810896441
+        },
+        {
+          "tagName": "测试员",
+          "tagWeight": 0.5165151944769006
+        }
+      ],
+      "skillsTags": [
+        {
+          "tagName": "jira",
+          "tagWeight": 0.6422678470611572
+        },
+        {
+          "tagName": "商务",
+          "tagWeight": 0.628066382408142
+        },
+        {
+          "tagName": "jmeter",
+          "tagWeight": 0.6098932266235352
+        },
+        {
+          "tagName": "自动化测试",
+          "tagWeight": 0.6001462936401367
+        },
+        {
+          "tagName": "禅道",
+          "tagWeight": 0.5987907409667969
+        },
+        {
+          "tagName": "接口测试",
+          "tagWeight": 0.598167371749878
+        },
+        {
+          "tagName": "fiddler",
+          "tagWeight": 0.5636950016021729
+        },
+        {
+          "tagName": "linux命令",
+          "tagWeight": 0.5483886718750001
+        },
+        {
+          "tagName": "功能测试",
+          "tagWeight": 0.5231624126434327
+        },
+        {
+          "tagName": "redis",
+          "tagWeight": 0.5013032913208008
+        },
+        {
+          "tagName": "linux系统",
+          "tagWeight": 0.4913677215576172
+        },
+        {
+          "tagName": "mysql",
+          "tagWeight": 0.4868952751159668
+        },
+        {
+          "tagName": "xmind",
+          "tagWeight": 0.4339586734771729
+        },
+        {
+          "tagName": "ui",
+          "tagWeight": 0.3531702995300293
+        },
+        {
+          "tagName": "酒店管理",
+          "tagWeight": 0.350331130027771
+        },
+        {
+          "tagName": "crm",
+          "tagWeight": 0.3101651525497437
+        },
+        {
+          "tagName": "产品经理",
+          "tagWeight": 0.3100674629211426
+        },
+        {
+          "tagName": "项目管理",
+          "tagWeight": 0.2803616285324097
+        },
+        {
+          "tagName": "酒店预订",
+          "tagWeight": 0.26348355889320374
+        },
+        {
+          "tagName": "数据分析",
+          "tagWeight": 0.22049238681793215
+        },
+        {
+          "tagName": "pms",
+          "tagWeight": 0.07577931046485901
+        },
+        {
+          "tagName": "sso",
+          "tagWeight": 0.07078662276268005
+        }
+      ]
+    },
+    "is985": null,
+    "is211": null,
+    "two": null,
+    "qs100": null,
+    "isUnifiedEnrolment": null,
+    "isStudyAbroad": null,
+    "reTag": null,
+    "highlights": null,
+    "risk": null,
+    "industry": null,
+    "function": null,
+    "industryCode": null,
+    "functionCode": null,
+    "expectFunction": null,
+    "expectFunctionCode": null,
+    "expectedIndustryCode": null,
+    "lastAddDate": null,
+    "isAuthorized": false,
+    "candidateUid": null,
+    "resumeLock": null,
+    "manualTagIds": null,
+    "manualTagNames": null,
+    "notes": null,
+    "mergedTo": null,
+    "isDeleted": null,
+    "explanation": null,
+    "numOfRemark": 0,
+    "handsOffInfo": {
+      "effect": false,
+      "workExperienceIds": null,
+      "companyNames": null,
+      "approvalProcessId": null,
+      "approvalStatus": null,
+      "processing": false
+    },
+    "resumeNoteMatch": null,
+    "locked": false
+  }
+}
