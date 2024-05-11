@@ -1,26 +1,14 @@
 import { Space, Row, Col } from 'antd';
 import classnames from 'classnames';
+import { createWithRemoteLoader } from '@kne/remote-loader';
+
 import importMessages from './locale';
 import style from './style.module.scss';
-import { useMemo } from 'react';
-import { createWithRemoteLoader } from '@kne/remote-loader';
-import RightOptionGroup from '../RightOptionGroup';
 
 export const PageHeaderInner = createWithRemoteLoader({
-  modules: ['Icon']
-})(({ remoteModules, className, title, iconType, info, tags, tagSplit, tagClassName, hasPrimary, showCount, options, getPopupContainer, showDropDownMenuBtn }) => {
-  const [Icon] = remoteModules;
-
-  const _options = useMemo(() => {
-    return options
-      ? (options || []).filter(item => {
-          if (typeof item.display === 'function') {
-            return item.display();
-          }
-          return item.display !== false;
-        })
-      : null;
-  }, [options]);
+  modules: ['Icon', 'ButtonGroup']
+})(({ remoteModules, className, title, iconType, info, tags, tagSplit, tagClassName, buttonOptions, buttonOptionsMaxWidth }) => {
+  const [Icon, ButtonGroup] = remoteModules;
 
   return (
     <Space direction="vertical" className={classnames(className, style['page-header'])}>
@@ -36,9 +24,9 @@ export const PageHeaderInner = createWithRemoteLoader({
             {info && <div className={style['info']}>{info}</div>}
           </Space>
         </Col>
-        {_options && (
-          <Col>
-            <RightOptionGroup options={_options} hasPrimary={hasPrimary} showCount={showCount} getPopupContainer={getPopupContainer} showDropDownMenuBtn={showDropDownMenuBtn} />
+        {buttonOptions && (
+          <Col className={style['button-options']} style={{ '--max-width': buttonOptionsMaxWidth }}>
+            <ButtonGroup {...buttonOptions} />
           </Col>
         )}
       </Row>
@@ -72,8 +60,7 @@ const PageHeader = createWithRemoteLoader({
 
 PageHeaderInner.defaultProps = {
   tagSplit: <span className={style['tag-split']}>|</span>,
-  tagClassName: '',
-  showDropDownMenuBtn: false
+  tagClassName: ''
 };
 
 PageHeader.defaultProps = {
