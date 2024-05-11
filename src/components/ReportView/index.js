@@ -6,25 +6,21 @@ import Table from './Table';
 import Part from './Part';
 import classNames from 'classnames';
 
-const typeMapping = {
-  list: List,
-  result: Result,
-  table: Table,
-  part: Part,
-  info: ({ children }) => <div className={classNames(style['info'], 'report-view-info')}>{children}</div>
-};
-const ReportView = ({ type = 'list', report, title, extra, ...props }) => {
-  const Component = typeMapping[type];
+const ReportView = ({ title, extra, className, children }) => {
   return (
-    <div className={style['report-view']}>
+    <div className={classNames(style['report-view'], className)}>
       <Flex className={style['title-outer']} justify="space-between">
         {title && <div className={style['title']}>{title}</div>}
         {extra && <div className={style['title-extra']}>{extra}</div>}
       </Flex>
-
-      <Component report={report} {...props} />
+      {children}
     </div>
   );
 };
+
+ReportView.List = List;
+ReportView.Result = Result;
+ReportView.Table = Table;
+ReportView.Part = Part;
 
 export default ReportView;

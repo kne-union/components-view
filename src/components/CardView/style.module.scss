@@ -1,0 +1,19 @@
+.main {
+  flex: 1;
+}
+
+.title {
+  font-size: var(--font-size-18);
+  font-weight: bold;
+  line-height: 25px;
+  max-width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle {
+  color: var(--font-color-grey-1);
+  font-size: var(--font-size-small);
+  font-weight: bold;
+  line-height: 16px;
+}

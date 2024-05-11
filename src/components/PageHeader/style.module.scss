@@ -57,3 +57,9 @@
 .tag-split {
   color: var(--font-color-grey-2);
 }
+
+.button-options {
+  padding: 0 !important;
+  margin-right: 60px;
+  max-width: var(--max-width, 20%);
+}
