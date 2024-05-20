@@ -3,11 +3,20 @@ import { createWithRemoteLoader } from '@kne/remote-loader';
 import get from 'lodash/get';
 import classnames from 'classnames';
 import style from './style.module.scss';
+import { useEffect, useRef } from 'react';
 
 const DialogList = createWithRemoteLoader({
   modules: ['components-core:Image']
 })(({ remoteModules, list = [], empty = null }) => {
   const [Image] = remoteModules;
+  const lastNodeRef = useRef(null);
+
+  useEffect(() => {
+    if (lastNodeRef) {
+      lastNodeRef?.current?.scrollIntoView?.();
+    }
+  }, [lastNodeRef, list]);
+
   return (
     <Flex vertical gap={24}>
       {list && list.length > 0
@@ -26,6 +35,7 @@ const DialogList = createWithRemoteLoader({
                     className={classnames(style['message'], {
                       [style['is-master']]: isMaster
                     })}
+                    ref={index === list?.length - 1 ? lastNodeRef : null}
                   >
                     {message}
                   </div>
