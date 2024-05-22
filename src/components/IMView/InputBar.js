@@ -12,7 +12,7 @@ const InputBar = createWithRemoteLoader({
   const [Icon] = remoteModules;
   const handlerSubmit = async () => {
     setIsPending(true);
-    const result = onSubmit && (await onSubmit(JSON.stringify(value)));
+    const result = onSubmit && (await onSubmit(value));
     result !== false && onChange('');
     setIsPending(false);
   };
