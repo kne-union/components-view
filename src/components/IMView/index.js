@@ -7,7 +7,7 @@ import style from './style.module.scss';
 
 const IMView = createWithRemoteLoader({
   modules: ['components-core:Common@SimpleBar']
-})(({ remoteModules, className, list, defaultValue = '', disabled, disabledChildren = null, onSubmit }) => {
+})(({ remoteModules, className, list, defaultValue = '', disabled, inputDisabled, disabledChildren = null, onSubmit }) => {
   const [SimpleBar] = remoteModules;
   return (
     <Flex vertical gap={16} className={classnames(className, style['im-view'])}>
@@ -18,7 +18,7 @@ const IMView = createWithRemoteLoader({
           <DialogList list={list} />
         </SimpleBar>
       )}
-      <InputBar defaultValue={defaultValue} onSubmit={onSubmit} disabled={disabled} />
+      <InputBar defaultValue={defaultValue} onSubmit={onSubmit} disabled={inputDisabled || disabled} />
     </Flex>
   );
 });
