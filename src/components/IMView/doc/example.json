@@ -1,10 +1,21 @@
 {
-  "isFull": false,
+  "isFull": true,
   "list": [
     {
       "title": "这里填写示例标题",
       "description": "这里填写示例说明",
       "code": "./base.js",
+      "scope": [
+        {
+          "name": "_IMView",
+          "packageName": "@components/IMView"
+        }
+      ]
+    },
+    {
+      "title": "输入框禁止输入",
+      "description": "输入框禁止输入",
+      "code": "./disabled.js",
       "scope": [
         {
           "name": "_IMView",
