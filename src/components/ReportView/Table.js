@@ -33,12 +33,14 @@ const Table = ({ report }) => {
   }, [group]);
 
   return (
-    <Flex vertical gap={32} className={style['table-view']}>
+    <Flex vertical gap={groupColumn?.isSubTitle ? 10 : 32} className={style['table-view']}>
       <Row wrap={false} className={style['table-header']}>
-        <Col span={groupColumn.span}>
-          <div className={style['table-header-col-item']}>{groupColumn.title}</div>
-        </Col>
-        <Col span={24 - groupColumn.span}>
+        {groupColumn?.isSubTitle ? null : (
+          <Col span={groupColumn.span}>
+            <div className={style['table-header-col-item']}>{groupColumn.title}-</div>
+          </Col>
+        )}
+        <Col span={groupColumn?.isSubTitle ? 24 : 24 - groupColumn.span}>
           <Row wrap={false}>
             {Array.from(otherColumns.values()).map(({ title, name, span }) => {
               return (
@@ -50,35 +52,45 @@ const Table = ({ report }) => {
           </Row>
         </Col>
       </Row>
-      <Space direction="vertical" split={<Divider />}>
+      <Space direction="vertical">
         {Object.keys(groupList).map(groupName => {
           const list = groupList[groupName];
           const currentGroup = groupMap.get(groupName);
-          const otherSpan = 24 - groupColumn.span;
+          const otherSpan = groupColumn?.isSubTitle ? 24 : 24 - groupColumn.span;
           return (
-            <Row key={groupName} wrap={false}>
-              <Col span={groupColumn.span}>
+            <div>
+              {groupColumn?.isSubTitle ? (
+                <Divider>{currentGroup.label}</Divider>
+              ) : /*<Row wrap={false} className={style['table-sub-header']}>
+                    <Col>
+                      <div className={style['table-header-col-item']}>{currentGroup.label}</div>
+                    </Col>
+                  </Row>*/
+              null}
+              <Row key={groupName} wrap={false}>
+                {/*<Col span={groupColumn.span}>
                 <div className={style['table-group-label']}>{currentGroup.label}</div>
-              </Col>
-              <Col span={otherSpan}>
-                {list.map((item, index) => {
-                  return (
-                    <Row wrap={false} key={index} className={classNames({ [style['table-row-item']]: index !== list?.length - 1 })}>
-                      {Array.from(otherColumns.values()).map(({ name }) => {
-                        const currentColumn = otherColumns.get(name);
-                        return (
-                          <Col span={currentColumn.span} key={name}>
-                            <div className={classNames(style['table-col-item'], { [style['table-col-item-description']]: name === 'description' })}>
-                              {currentColumn.hasOwnProperty('valueOf') && typeof currentColumn.valueOf === 'function' ? currentColumn.valueOf(item[name], item) : item[name]}
-                            </div>
-                          </Col>
-                        );
-                      })}
-                    </Row>
-                  );
-                })}
-              </Col>
-            </Row>
+              </Col>*/}
+                <Col span={otherSpan}>
+                  {list.map((item, index) => {
+                    return (
+                      <Row wrap={false} key={index} className={classNames({ [style['table-row-item']]: index !== list?.length - 1 })}>
+                        {Array.from(otherColumns.values()).map(({ name }) => {
+                          const currentColumn = otherColumns.get(name);
+                          return (
+                            <Col span={currentColumn.span} key={name}>
+                              <div className={classNames(style['table-col-item'], { [style['table-col-item-description']]: name === 'description' })}>
+                                {currentColumn.hasOwnProperty('valueOf') && typeof currentColumn.valueOf === 'function' ? currentColumn.valueOf(item[name], item) : item[name]}
+                              </div>
+                            </Col>
+                          );
+                        })}
+                      </Row>
+                    );
+                  })}
+                </Col>
+              </Row>
+            </div>
           );
         })}
       </Space>
