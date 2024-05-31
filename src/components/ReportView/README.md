@@ -115,7 +115,7 @@ const BaseExample = () => {
                 {
                   title: '评估维度',
                   name: 'group',
-                  isSubTitle: true,
+                  isSubTitle: true
                 },
                 {
                   title: '评分项',
