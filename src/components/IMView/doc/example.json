@@ -13,6 +13,17 @@
       ]
     },
     {
+      "title": "不显示输入框",
+      "description": "不显示输入框",
+      "code": "./hide-input.js",
+      "scope": [
+        {
+          "name": "_IMView",
+          "packageName": "@components/IMView"
+        }
+      ]
+    },
+    {
       "title": "输入框禁止输入",
       "description": "输入框禁止输入",
       "code": "./disabled.js",
