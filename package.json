@@ -1,6 +1,6 @@
 {
   "name": "@kne-components/components-view",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "展示类组件",
   "scripts": {
     "init": "husky",
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@kne/modules-dev": "^2.0.14",
+    "@kne/modules-dev": "^2.0.25",
     "@kne/react-fetch": "^1.4.3",
     "@kne/remote-loader": "^1.2.3",
     "@testing-library/jest-dom": "^6.4.2",
