@@ -30,7 +30,12 @@ const DialogList = createWithRemoteLoader({
                 <Col order={isMaster ? 1 : 0}>
                   <Image.Avatar {...Object.assign({}, get(user, 'avatar'))} shape="circle" className={style['avatar']} size={40} />
                 </Col>
-                <Col flex={1}>
+                <Col
+                  flex={1}
+                  className={classnames({
+                    [style['in-right']]: isMaster
+                  })}
+                >
                   <div
                     className={classnames(style['message'], {
                       [style['is-master']]: isMaster
