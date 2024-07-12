@@ -16,9 +16,9 @@
 - _ExperiencesView(@components/ExperiencesView)
 
 ```jsx
-const {default:ExperiencesView} = _ExperiencesView;
-const BaseExample = ()=>{
-    return <ExperiencesView />;
+const { default: ExperiencesView } = _ExperiencesView;
+const BaseExample = () => {
+  return <ExperiencesView />;
 };
 
 render(<BaseExample />);
