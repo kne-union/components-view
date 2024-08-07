@@ -27,11 +27,6 @@ remoteLoaderPreset({
       remote: 'components-iconfont',
       defaultVersion: '0.1.10'
     },
-    'components-widget': {
-      ...registry,
-      remote: 'components-widget',
-      defaultVersion: '0.1.0'
-    },
     'components-view':
       process.env.NODE_ENV === 'development'
         ? {
