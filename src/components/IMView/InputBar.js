@@ -9,6 +9,7 @@ const InputBar = createWithRemoteLoader({
 })(({ remoteModules, disabled, defaultValue, onSubmit }) => {
   const [value, onChange] = useState(defaultValue);
   const [isPending, setIsPending] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const [Icon] = remoteModules;
   const handlerSubmit = async () => {
     setIsPending(true);
@@ -20,7 +21,8 @@ const InputBar = createWithRemoteLoader({
   return (
     <Flex
       className={classnames(style['input-bar'], {
-        [style['disabled']]: disabled
+        [style['disabled']]: disabled,
+        [style['focus']]: isFocus
       })}
     >
       <Input.TextArea
@@ -30,6 +32,8 @@ const InputBar = createWithRemoteLoader({
         onChange={e => {
           onChange(e.target.value);
         }}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
         variant="borderless"
         placeholder="Enter发送，或点击右侧箭头发送，Ctrl+Enter换行"
         onPressEnter={e => {

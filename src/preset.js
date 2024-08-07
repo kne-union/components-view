@@ -7,11 +7,15 @@ import omit from 'lodash/omit';
 
 window.PUBLIC_URL = process.env.PUBLIC_URL;
 
+const registry = {
+  url: 'https://uc.fatalent.cn',
+  tpl: '{{url}}/packages/@kne-components/{{remote}}/{{version}}/build'
+};
+
 const componentsCoreRemote = {
+  ...registry,
   remote: 'components-core',
-  url: 'https://registry.npmmirror.com',
-  tpl: '{{url}}/@kne-components%2f{{remote}}/{{version}}/files/build',
-  defaultVersion: '0.1.33'
+  defaultVersion: '0.2.24'
 };
 
 remoteLoaderPreset({
@@ -19,10 +23,9 @@ remoteLoaderPreset({
     default: componentsCoreRemote,
     'components-core': componentsCoreRemote,
     'components-iconfont': {
+      ...registry,
       remote: 'components-iconfont',
-      url: 'https://registry.npmmirror.com',
-      tpl: '{{url}}/@kne-components%2f{{remote}}/{{version}}/files/build',
-      defaultVersion: '0.1.4'
+      defaultVersion: '0.1.10'
     },
     'components-view':
       process.env.NODE_ENV === 'development'
@@ -32,9 +35,8 @@ remoteLoaderPreset({
             tpl: '{{url}}'
           }
         : {
+            ...registry,
             remote: 'components-view',
-            url: 'https://registry.npmmirror.com',
-            tpl: '{{url}}/@kne-components%2f{{remote}}/{{version}}/files/build',
             defaultVersion: process.env.DEFAULT_VERSION
           }
   }

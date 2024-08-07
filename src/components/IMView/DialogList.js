@@ -4,10 +4,11 @@ import get from 'lodash/get';
 import classnames from 'classnames';
 import style from './style.module.scss';
 import { useEffect, useRef } from 'react';
+import { ReactComponent as VoicePlaybackSvg } from './svg/voice-playback.svg';
 
 const DialogList = createWithRemoteLoader({
   modules: ['components-core:Image']
-})(({ remoteModules, list = [], empty = null }) => {
+})(({ remoteModules, list = [], empty = null, dialogueFormat, playAudio }) => {
   const [Image] = remoteModules;
   const lastNodeRef = useRef(null);
 
@@ -20,7 +21,7 @@ const DialogList = createWithRemoteLoader({
   return (
     <Flex vertical gap={24}>
       {list && list.length > 0
-        ? list.map(({ id, user, message }, index) => {
+        ? list.map(({ id, user, message, duration = 13 }, index) => {
             const isMaster = get(user, 'isMaster');
             return (
               <Row key={id || index} gutter={12} wrap={false}>
@@ -42,6 +43,14 @@ const DialogList = createWithRemoteLoader({
                     })}
                     ref={index === list?.length - 1 ? lastNodeRef : null}
                   >
+                    {dialogueFormat === 2 ? (
+                      <div className={style['speech-input-wrap']}>
+                        <div className={style['speech-input']} onClick={() => playAudio?.({ id, user, message, duration, index })}>
+                          <VoicePlaybackSvg className={style['speech-input-svg']} />
+                          <span>{`${duration}‘’`}</span>
+                        </div>
+                      </div>
+                    ) : null}
                     {message}
                   </div>
                 </Col>

@@ -13,6 +13,17 @@
       ]
     },
     {
+      "title": "语音交互",
+      "description": "语音交互",
+      "code": "./speech.js",
+      "scope": [
+        {
+          "name": "_IMView",
+          "packageName": "@components/IMView"
+        }
+      ]
+    },
+    {
       "title": "不显示输入框",
       "description": "不显示输入框",
       "code": "./hide-input.js",
