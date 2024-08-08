@@ -17,6 +17,7 @@
   .speech-input-wrap {
     margin-bottom: 8px;
     .speech-input {
+      cursor: pointer;
       display: flex;
       align-items: center;
       padding: 5px 8px;
@@ -120,9 +121,12 @@
       height: 32px;
       border-radius: 16px;
       background: var(--primary-color-1);
-      padding: 9px 8px;
       box-sizing: border-box;
       color: var(--primary-color);
+
+      &:hover {
+        background: var(--primary-color-1) !important;
+      }
     }
   }
 

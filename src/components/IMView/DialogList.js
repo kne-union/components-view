@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import style from './style.module.scss';
 import { useEffect, useRef } from 'react';
 import { ReactComponent as VoicePlaybackSvg } from './svg/voice-playback.svg';
+import dayjs from 'dayjs';
 
 const DialogList = createWithRemoteLoader({
   modules: ['components-core:Image']
@@ -21,7 +22,7 @@ const DialogList = createWithRemoteLoader({
   return (
     <Flex vertical gap={24}>
       {list && list.length > 0
-        ? list.map(({ id, user, message, duration = 13 }, index) => {
+        ? list.map(({ id, user, message, duration = 0 }, index) => {
             const isMaster = get(user, 'isMaster');
             return (
               <Row key={id || index} gutter={12} wrap={false}>
@@ -43,11 +44,11 @@ const DialogList = createWithRemoteLoader({
                     })}
                     ref={index === list?.length - 1 ? lastNodeRef : null}
                   >
-                    {dialogueFormat === 2 ? (
+                    {dialogueFormat === 2 && duration ? (
                       <div className={style['speech-input-wrap']}>
                         <div className={style['speech-input']} onClick={() => playAudio?.({ id, user, message, duration, index })}>
                           <VoicePlaybackSvg className={style['speech-input-svg']} />
-                          <span>{`${duration}‘’`}</span>
+                          <span>{dayjs(duration < 1000 ? 1000 : duration).format(duration >= 1000 * 60 ? 'm‘s‘’' : 's‘’')}</span>
                         </div>
                       </div>
                     ) : null}
