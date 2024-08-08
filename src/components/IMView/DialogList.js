@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import style from './style.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { ReactComponent as VoicePlaybackSvg } from './svg/voice-playback.svg';
+import { ReactComponent as VoicePlaybackPlayingSvg } from './svg/voice-playback-playing.svg';
 import dayjs from 'dayjs';
 
 const DialogList = createWithRemoteLoader({
@@ -15,7 +16,7 @@ const DialogList = createWithRemoteLoader({
 
   const playingRef = useRef(null);
 
-  const [playing, setPlaying] = useState({});
+  const [isPlaying, setIsPlaying] = useState({});
 
   useEffect(() => {
     if (lastNodeRef) {
@@ -58,19 +59,24 @@ const DialogList = createWithRemoteLoader({
                                 playingRef.current.audio.pause();
                               }
                               playingRef.current = null;
+                              setIsPlaying(null);
                             }
                             if (playingRef.current && playingRef.current.playing === true && playingRef.current.fileId === fileId) {
                               playingRef.current.audio.pause();
                               playingRef.current = null;
+                              setIsPlaying(null);
                               return;
                             }
                             const audio = new Audio(`/api-node/v1/static/file-id/${fileId}`);
                             audio.currentTime = 0;
                             audio.play();
                             playingRef.current = { id, user, message, duration, fileId, ...props, audio, playing: true };
+                            setIsPlaying(playingRef.current);
                             // 监听播放完成事件
                             audio.addEventListener('ended', function () {
                               console.log('音频播放完成');
+                              playingRef.current = null;
+                              setIsPlaying(null);
                             });
                             // 监听播放暂停事件
                             audio.addEventListener('pause', function () {
@@ -82,12 +88,11 @@ const DialogList = createWithRemoteLoader({
                             });
                           }}
                         >
-                          <VoicePlaybackSvg
-                            className={classnames({}, style['speech-input-svg'], {
-                              // [style['audio-is-playing']]: !!isPlaying,
-                              'audio-is-playing': !!playingRef.current?.playing
-                            })}
-                          />
+                          {get(isPlaying, 'fileId') === fileId && isPlaying?.playing ? (
+                            <VoicePlaybackPlayingSvg className={classnames({}, style['speech-input-svg'])} />
+                          ) : (
+                            <VoicePlaybackSvg className={classnames({}, style['speech-input-svg'])} />
+                          )}
                           <span>{dayjs(duration < 1000 ? 1000 : duration).format(duration >= 1000 * 60 ? 'm‘s‘’' : 's‘’')}</span>
                         </div>
                       </div>
