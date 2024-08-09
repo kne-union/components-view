@@ -9,7 +9,7 @@
                 <animate attributeName="display" from="none" to="block" dur="1s" begin="0.5s" repeatCount="indefinite" />
             </path>
             <path display="none" d="M8.1875,0.874845324 C11.604375,4.25791055 11.604375,9.74208945 8.1875,13.1251547 L9.07125,14 C12.97625,10.1337281 12.97625,3.86565317 9.07125,0 L8.1875,0.875464027 L8.1875,0.874845324 Z" id="路径" fill="#000000" fill-rule="nonzero">
-                <animate attributeName="display" from="none" to="block" dur="0.5s" begin="0s" repeatCount="indefinite" />
+                <animate attributeName="display" from="none" to="block" dur="0.5s" begin="1s" repeatCount="indefinite" />
             </path>
         </g>
     </g>
