@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 import style from './style.module.scss';
 import { ReactComponent as RecordingSvg } from './svg/recording.svg';
+import Recording from './Recording';
 
 const InputSpeechBar = createWithRemoteLoader({
   modules: ['components-core:Icon']
@@ -31,7 +32,7 @@ const InputSpeechBar = createWithRemoteLoader({
         <div className={style['input-wrap-action']}>
           {isFocus ? (
             <Space size={4} className={style['recording-wrap']}>
-              <RecordingSvg className={style['recording-svg']} />
+              <Recording />
               录音中
             </Space>
           ) : (
