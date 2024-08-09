@@ -106,9 +106,6 @@
     align-items: center;
     .recording-wrap {
       color: var(--primary-color);
-      .recording-svg {
-        vertical-align: -2px;
-      }
     }
 
     .not-start-tips {
@@ -139,5 +136,45 @@
     &.no-result {
       color: #cccccc;
     }
+  }
+}
+
+.recording-svg {
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+  @keyframes radius-animation {
+    100% {
+      height: 14px;
+      transform-origin: center;
+      filter: contrast(2);
+    }
+  }
+  .item {
+    width: 2px;
+    margin-right: 2px;
+    background: var(--primary-color);
+    transition: all;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+  }
+
+  .one {
+    height: 6px;
+    animation: radius-animation 0.4s infinite;
+  }
+  .two {
+    height: 12px;
+    animation: radius-animation 0.62s infinite;
+  }
+  .three {
+    height: 9px;
+    animation: radius-animation 0.5s infinite;
+  }
+  .four {
+    height: 6px;
+    animation: radius-animation 0.67s infinite;
   }
 }
