@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button, Flex, Space } from 'antd';
 import { createWithRemoteLoader } from '@kne/remote-loader';
 import classnames from 'classnames';
@@ -12,13 +12,13 @@ const InputSpeechBar = createWithRemoteLoader({
   const [Icon] = remoteModules;
   const [isPending, setIsPending] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
-  const handlerSubmit = async () => {
-    if (onComplete) {
-      setIsPending(true);
-      await onComplete?.();
-      setIsPending(false);
+  const lastNodeRef = useRef(null);
+
+  useEffect(() => {
+    if (lastNodeRef) {
+      lastNodeRef?.current?.scrollTo?.(0, 100);
     }
-  };
+  }, [lastNodeRef, result]);
 
   return (
     <Flex
@@ -43,12 +43,14 @@ const InputSpeechBar = createWithRemoteLoader({
             loading={isPending}
             className={classnames({}, style['record-btn'], { [style['not-disabled']]: !disabled })}
             onClick={async () => {
-              setIsFocus(prevState => !prevState);
+              setIsPending(true);
               if (isFocus) {
-                await handlerSubmit();
+                await onComplete?.();
               } else {
-                onStart?.();
+                await onStart?.();
               }
+              setIsPending(false);
+              setIsFocus(prevState => !prevState);
               // onRecording?.();
             }}
           >
@@ -61,6 +63,7 @@ const InputSpeechBar = createWithRemoteLoader({
             className={classnames(style['input-result'], {
               [style['no-result']]: !result
             })}
+            ref={lastNodeRef}
           >
             {result || '您可以开始说话'}
           </div>
