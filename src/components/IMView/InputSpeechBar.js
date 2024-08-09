@@ -4,7 +4,6 @@ import { createWithRemoteLoader } from '@kne/remote-loader';
 import classnames from 'classnames';
 
 import style from './style.module.scss';
-import { ReactComponent as RecordingSvg } from './svg/recording.svg';
 import Recording from './Recording';
 
 const InputSpeechBar = createWithRemoteLoader({
@@ -42,7 +41,7 @@ const InputSpeechBar = createWithRemoteLoader({
             type="link"
             disabled={disabled}
             loading={isPending}
-            className={style['record-btn']}
+            className={classnames({}, style['record-btn'], { [style['not-disabled']]: !disabled })}
             onClick={async () => {
               setIsFocus(prevState => !prevState);
               if (isFocus) {

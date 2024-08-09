@@ -53,12 +53,12 @@ const DialogList = createWithRemoteLoader({
       setPlayAudioData(null);
     });
     // 监听播放暂停事件
-    audio.addEventListener('pause', function () {
-      console.log('音频播放暂停');
+    audio.addEventListener('pause', function (e) {
+      console.log('音频播放暂停', e);
     });
     // 监听播放错误事件
-    audio.addEventListener('error', function () {
-      console.error('音频播放出错');
+    audio.addEventListener('error', function (e) {
+      console.error('音频播放出错', e);
     });
   };
 
