@@ -1,22 +1,23 @@
 import { useState } from 'react';
-import { Input, Button, Flex, Space, Divider } from 'antd';
+import { Button, Flex, Space } from 'antd';
 import { createWithRemoteLoader } from '@kne/remote-loader';
 import classnames from 'classnames';
+
 import style from './style.module.scss';
 import { ReactComponent as RecordingSvg } from './svg/recording.svg';
 
 const InputSpeechBar = createWithRemoteLoader({
   modules: ['components-core:Icon']
-})(({ remoteModules, disabled, defaultValue, onSubmit, result }) => {
+})(({ remoteModules, disabled, result, onStart, onComplete, onRecording }) => {
   const [Icon] = remoteModules;
-  const [value, onChange] = useState(defaultValue);
   const [isPending, setIsPending] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const handlerSubmit = async () => {
-    setIsPending(true);
-    const result = onSubmit && (await onSubmit(value));
-    result !== false && onChange('');
-    setIsPending(false);
+    if (onComplete) {
+      setIsPending(true);
+      await onComplete?.();
+      setIsPending(false);
+    }
   };
 
   return (
@@ -36,16 +37,24 @@ const InputSpeechBar = createWithRemoteLoader({
           ) : (
             <div className={style['not-start-tips']}>点击右侧开始录音，即刻与模拟候选人聊天吧!</div>
           )}
-          <Space
+          <Button
+            type="link"
+            disabled={disabled}
+            loading={isPending}
             className={style['record-btn']}
-            onClick={() => {
+            onClick={async () => {
               setIsFocus(prevState => !prevState);
+              if (isFocus) {
+                await handlerSubmit();
+              } else {
+                onStart?.();
+              }
+              // onRecording?.();
             }}
-            size={2}
           >
             <Icon type="yuyin" />
             {isFocus ? '结束录音并发送' : '开始录音'}
-          </Space>
+          </Button>
         </div>
         {isFocus && (
           <div

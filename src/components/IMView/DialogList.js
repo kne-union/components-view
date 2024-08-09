@@ -3,14 +3,20 @@ import { createWithRemoteLoader } from '@kne/remote-loader';
 import get from 'lodash/get';
 import classnames from 'classnames';
 import style from './style.module.scss';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ReactComponent as VoicePlaybackSvg } from './svg/voice-playback.svg';
+import { ReactComponent as VoicePlaybackPlayingSvg } from './svg/voice-playback-playing.svg';
+import dayjs from 'dayjs';
 
 const DialogList = createWithRemoteLoader({
   modules: ['components-core:Image']
-})(({ remoteModules, list = [], empty = null, dialogueFormat, playAudio }) => {
+})(({ remoteModules, list = [], empty = null, dialogueFormat }) => {
   const [Image] = remoteModules;
   const lastNodeRef = useRef(null);
+
+  const playingRef = useRef(null);
+
+  const [isPlaying, setIsPlaying] = useState({});
 
   useEffect(() => {
     if (lastNodeRef) {
@@ -21,7 +27,7 @@ const DialogList = createWithRemoteLoader({
   return (
     <Flex vertical gap={24}>
       {list && list.length > 0
-        ? list.map(({ id, user, message, duration = 13 }, index) => {
+        ? list.map(({ id, user, message, duration = 0, fileId, ...props }, index) => {
             const isMaster = get(user, 'isMaster');
             return (
               <Row key={id || index} gutter={12} wrap={false}>
@@ -43,11 +49,51 @@ const DialogList = createWithRemoteLoader({
                     })}
                     ref={index === list?.length - 1 ? lastNodeRef : null}
                   >
-                    {dialogueFormat === 2 ? (
+                    {dialogueFormat === 2 && duration ? (
                       <div className={style['speech-input-wrap']}>
-                        <div className={style['speech-input']} onClick={() => playAudio?.({ id, user, message, duration, index })}>
-                          <VoicePlaybackSvg className={style['speech-input-svg']} />
-                          <span>{`${duration}‘’`}</span>
+                        <div
+                          className={style['speech-input']}
+                          onClick={() => {
+                            if (playingRef.current && playingRef.current.fileId !== fileId) {
+                              if (playingRef.current.playing === true) {
+                                playingRef.current.audio.pause();
+                              }
+                              playingRef.current = null;
+                              setIsPlaying(null);
+                            }
+                            if (playingRef.current && playingRef.current.playing === true && playingRef.current.fileId === fileId) {
+                              playingRef.current.audio.pause();
+                              playingRef.current = null;
+                              setIsPlaying(null);
+                              return;
+                            }
+                            const audio = new Audio(`/api-node/v1/static/file-id/${fileId}`);
+                            audio.currentTime = 0;
+                            audio.play();
+                            playingRef.current = { id, user, message, duration, fileId, ...props, audio, playing: true };
+                            setIsPlaying(playingRef.current);
+                            // 监听播放完成事件
+                            audio.addEventListener('ended', function () {
+                              console.log('音频播放完成');
+                              playingRef.current = null;
+                              setIsPlaying(null);
+                            });
+                            // 监听播放暂停事件
+                            audio.addEventListener('pause', function () {
+                              console.log('音频播放暂停');
+                            });
+                            // 监听播放错误事件
+                            audio.addEventListener('error', function () {
+                              console.error('音频播放出错');
+                            });
+                          }}
+                        >
+                          {get(isPlaying, 'fileId') === fileId && isPlaying?.playing ? (
+                            <VoicePlaybackPlayingSvg className={classnames({}, style['speech-input-svg'])} />
+                          ) : (
+                            <VoicePlaybackSvg className={classnames({}, style['speech-input-svg'])} />
+                          )}
+                          <span>{dayjs(duration < 1000 ? 1000 : duration).format(duration >= 1000 * 60 ? 'm‘s‘’' : 's‘’')}</span>
                         </div>
                       </div>
                     ) : null}
