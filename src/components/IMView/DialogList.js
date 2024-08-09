@@ -93,7 +93,7 @@ const DialogList = createWithRemoteLoader({
                     })}
                     ref={index === list?.length - 1 ? lastNodeRef : null}
                   >
-                    {dialogueFormat === 2 ? (
+                    {dialogueFormat === 2 && fileId ? (
                       <div className={style['speech-input-wrap']}>
                         <div
                           className={style['speech-input']}
