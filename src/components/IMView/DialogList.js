@@ -40,7 +40,7 @@ const DialogList = createWithRemoteLoader({
       setPlayAudioData(null);
       return;
     }
-    const audio = new Audio(`/api-node/v1/static/file-id/${fileId}`);
+    const audio = new Audio(`${window.runtimeApiUrl || ''}/api-node/v1/static/file-id/${fileId}`);
     audio.currentTime = 0;
     audio.play();
     playingRef.current = { fileId, ...props, audio, playing: true };
