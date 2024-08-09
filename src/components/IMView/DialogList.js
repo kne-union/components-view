@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 
 const DialogList = createWithRemoteLoader({
   modules: ['components-core:Image']
-})(({ remoteModules, list = [], empty = null, dialogueFormat }) => {
+})(({ remoteModules, list = [], empty = null, dialogueFormat, playAudioData, setPlayAudioData }) => {
   const [Image] = remoteModules;
   const lastNodeRef = useRef(null);
 
@@ -23,6 +23,50 @@ const DialogList = createWithRemoteLoader({
       lastNodeRef?.current?.scrollIntoView?.();
     }
   }, [lastNodeRef, list]);
+
+  const onPlaying = ({ fileId, ...props }) => {
+    if (playingRef.current && playingRef.current.fileId !== fileId) {
+      if (playingRef.current.playing === true) {
+        playingRef.current.audio.pause();
+      }
+      playingRef.current = null;
+      setIsPlaying(null);
+      setPlayAudioData(null);
+    }
+    if (playingRef.current && playingRef.current.playing === true && playingRef.current.fileId === fileId) {
+      playingRef.current.audio.pause();
+      playingRef.current = null;
+      setIsPlaying(null);
+      setPlayAudioData(null);
+      return;
+    }
+    const audio = new Audio(`/api-node/v1/static/file-id/${fileId}`);
+    audio.currentTime = 0;
+    audio.play();
+    playingRef.current = { fileId, ...props, audio, playing: true };
+    setIsPlaying(playingRef.current);
+    // 监听播放完成事件
+    audio.addEventListener('ended', function () {
+      console.log('音频播放完成');
+      playingRef.current = null;
+      setIsPlaying(null);
+      setPlayAudioData(null);
+    });
+    // 监听播放暂停事件
+    audio.addEventListener('pause', function () {
+      console.log('音频播放暂停');
+    });
+    // 监听播放错误事件
+    audio.addEventListener('error', function () {
+      console.error('音频播放出错');
+    });
+  };
+
+  useEffect(() => {
+    if (playAudioData) {
+      onPlaying(playAudioData);
+    }
+  }, [playAudioData]);
 
   return (
     <Flex vertical gap={24}>
@@ -49,43 +93,12 @@ const DialogList = createWithRemoteLoader({
                     })}
                     ref={index === list?.length - 1 ? lastNodeRef : null}
                   >
-                    {dialogueFormat === 2 && duration ? (
+                    {dialogueFormat === 2 ? (
                       <div className={style['speech-input-wrap']}>
                         <div
                           className={style['speech-input']}
                           onClick={() => {
-                            if (playingRef.current && playingRef.current.fileId !== fileId) {
-                              if (playingRef.current.playing === true) {
-                                playingRef.current.audio.pause();
-                              }
-                              playingRef.current = null;
-                              setIsPlaying(null);
-                            }
-                            if (playingRef.current && playingRef.current.playing === true && playingRef.current.fileId === fileId) {
-                              playingRef.current.audio.pause();
-                              playingRef.current = null;
-                              setIsPlaying(null);
-                              return;
-                            }
-                            const audio = new Audio(`/api-node/v1/static/file-id/${fileId}`);
-                            audio.currentTime = 0;
-                            audio.play();
-                            playingRef.current = { id, user, message, duration, fileId, ...props, audio, playing: true };
-                            setIsPlaying(playingRef.current);
-                            // 监听播放完成事件
-                            audio.addEventListener('ended', function () {
-                              console.log('音频播放完成');
-                              playingRef.current = null;
-                              setIsPlaying(null);
-                            });
-                            // 监听播放暂停事件
-                            audio.addEventListener('pause', function () {
-                              console.log('音频播放暂停');
-                            });
-                            // 监听播放错误事件
-                            audio.addEventListener('error', function () {
-                              console.error('音频播放出错');
-                            });
+                            onPlaying({ id, user, message, duration, fileId, ...props });
                           }}
                         >
                           {get(isPlaying, 'fileId') === fileId && isPlaying?.playing ? (
@@ -93,7 +106,7 @@ const DialogList = createWithRemoteLoader({
                           ) : (
                             <VoicePlaybackSvg className={classnames({}, style['speech-input-svg'])} />
                           )}
-                          <span>{dayjs(duration < 1000 ? 1000 : duration).format(duration >= 1000 * 60 ? 'm‘s‘’' : 's‘’')}</span>
+                          {duration ? <span>{dayjs(duration < 1000 ? 1000 : duration).format(duration >= 1000 * 60 ? 'm‘s‘’' : 's‘’')}</span> : null}
                         </div>
                       </div>
                     ) : null}
