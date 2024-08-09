@@ -31,13 +31,13 @@ const DialogList = createWithRemoteLoader({
       }
       playingRef.current = null;
       setIsPlaying(null);
-      setPlayAudioData(null);
+      setPlayAudioData?.(null);
     }
     if (playingRef.current && playingRef.current.playing === true && playingRef.current.fileId === fileId) {
       playingRef.current.audio.pause();
       playingRef.current = null;
       setIsPlaying(null);
-      setPlayAudioData(null);
+      setPlayAudioData?.(null);
       return;
     }
     const audio = new Audio(`${window.runtimeApiUrl || ''}/api-node/v1/static/file-id/${fileId}`);
@@ -50,7 +50,7 @@ const DialogList = createWithRemoteLoader({
       console.log('音频播放完成');
       playingRef.current = null;
       setIsPlaying(null);
-      setPlayAudioData(null);
+      setPlayAudioData?.(null);
     });
     // 监听播放暂停事件
     audio.addEventListener('pause', function (e) {
