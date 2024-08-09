@@ -113,16 +113,17 @@
     }
 
     .record-btn {
-      cursor: pointer;
       width: fit-content;
       height: 32px;
       border-radius: 16px;
-      background: var(--primary-color-1);
       box-sizing: border-box;
-      color: var(--primary-color);
+      gap: 0;
 
-      &:hover {
-        background: var(--primary-color-1) !important;
+      &.not-disabled {
+        background: var(--primary-color-1);
+        &:hover {
+          background: var(--primary-color-1) !important;
+        }
       }
     }
   }
