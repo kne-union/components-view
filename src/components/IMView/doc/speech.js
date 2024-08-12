@@ -5,6 +5,7 @@ const BaseExample = () => {
       <div className="inner">
         <IMView
           dialogueFormat={2}
+          onCancel={() => console.log('cancel...')}
           list={[
             {
               id: 1,

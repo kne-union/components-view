@@ -112,6 +112,14 @@
       color: #cccccc;
     }
 
+    .record-cancel {
+      color: #666666;
+      cursor: pointer;
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+
     .record-btn {
       width: fit-content;
       height: 32px;
