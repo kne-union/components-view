@@ -19,7 +19,7 @@ const inputBar = {
 
 const IMView = createWithRemoteLoader({
   modules: ['components-core:Common@SimpleBar']
-})(({ remoteModules, className, list, defaultValue = '', disabled, inputDisabled, disabledChildren = null, onSubmit, hideInput, dialogueFormat = 1, playAudioData, setPlayAudioData, ...props }) => {
+})(({ remoteModules, className, list, defaultValue = '', disabled, inputDisabled, disabledChildren = null, onSubmit, hideInput, dialogueFormat = 1, playAudioData, setPlayAudioData, empty, ...props }) => {
   const [SimpleBar] = remoteModules;
   const InputComponent = inputBar[dialogueFormat];
 
@@ -27,10 +27,12 @@ const IMView = createWithRemoteLoader({
     <Flex vertical gap={16} className={classnames(className, style['im-view'])}>
       {disabled ? (
         <div className={style['dialog-list']}>{disabledChildren}</div>
-      ) : (
+      ) : list && list.length > 0 ? (
         <SimpleBar className={style['dialog-list']}>
-          <DialogList list={list} dialogueFormat={dialogueFormat} playAudioData={playAudioData} setPlayAudioData={setPlayAudioData} />
+          <DialogList list={list} dialogueFormat={dialogueFormat} playAudioData={playAudioData} setPlayAudioData={setPlayAudioData} empty={empty} />
         </SimpleBar>
+      ) : (
+        <div className={style['dialog-list']}>{empty}</div>
       )}
       {!hideInput && <InputComponent defaultValue={defaultValue} onSubmit={onSubmit} disabled={inputDisabled || disabled} {...props} />}
     </Flex>
