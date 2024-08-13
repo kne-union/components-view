@@ -46,10 +46,9 @@ export const PageHeaderInner = createWithRemoteLoader({
 });
 
 const PageHeader = createWithRemoteLoader({
-  modules: ['components-core:Intl']
+  modules: ['components-core:Intl@IntlProvider']
 })(({ remoteModules, ...props }) => {
-  const [Intl] = remoteModules;
-  const { IntlProvider } = Intl;
+  const [IntlProvider] = remoteModules;
 
   return (
     <IntlProvider importMessages={importMessages} moduleName="PageHeader">
