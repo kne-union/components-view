@@ -44,6 +44,7 @@ const BaseExample = () => {
       <PageHeaderInner
         title="详情页名称"
         info="编号:85767"
+        buttonOptionsMaxWidth={'300px'}
         buttonOptions={{
           list: [
             {

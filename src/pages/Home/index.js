@@ -1,7 +1,7 @@
 import { createWithRemoteLoader } from '@kne/remote-loader';
 
 const Home = createWithRemoteLoader({
-  modules: ['Layout@Page']
+  modules: ['components-core:Layout@Page']
 })(({ remoteModules }) => {
   const [Page] = remoteModules;
   return (

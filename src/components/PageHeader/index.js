@@ -6,13 +6,13 @@ import importMessages from './locale';
 import style from './style.module.scss';
 
 export const PageHeaderInner = createWithRemoteLoader({
-  modules: ['Icon', 'ButtonGroup']
+  modules: ['components-core:Icon', 'components-core:ButtonGroup']
 })(({ remoteModules, className, title, iconType, info, tags, tagSplit, tagClassName, buttonOptions, buttonOptionsMaxWidth }) => {
   const [Icon, ButtonGroup] = remoteModules;
 
   return (
     <Space direction="vertical" className={classnames(className, style['page-header'])}>
-      <Row gutter={[120, 12]} wrap={false}>
+      <Row wrap={false}>
         <Col flex={1} className={style['main']}>
           <Space align="start">
             {iconType && (
@@ -25,7 +25,7 @@ export const PageHeaderInner = createWithRemoteLoader({
           </Space>
         </Col>
         {buttonOptions && (
-          <Col className={style['button-options']} style={{ '--max-width': buttonOptionsMaxWidth }}>
+          <Col flex={1} className={style['button-options']} style={{ '--max-width': buttonOptionsMaxWidth }}>
             <ButtonGroup {...buttonOptions} />
           </Col>
         )}
@@ -46,10 +46,9 @@ export const PageHeaderInner = createWithRemoteLoader({
 });
 
 const PageHeader = createWithRemoteLoader({
-  modules: ['components-core:Intl']
+  modules: ['components-core:Intl@IntlProvider']
 })(({ remoteModules, ...props }) => {
-  const [Intl] = remoteModules;
-  const { IntlProvider } = Intl;
+  const [IntlProvider] = remoteModules;
 
   return (
     <IntlProvider importMessages={importMessages} moduleName="PageHeader">
