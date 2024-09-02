@@ -7,12 +7,13 @@ import style from './style.module.scss';
 
 export const PageHeaderInner = createWithRemoteLoader({
   modules: ['components-core:Icon', 'components-core:ButtonGroup']
-})(({ remoteModules, className, title, iconType, info, tags, tagSplit, tagClassName, buttonOptions, buttonOptionsMaxWidth }) => {
+})(({ remoteModules, className, title, iconType, info, tags, tagSplit, tagClassName, buttonOptions, buttonOptionsMaxWidth, addonBefore, addonAfter }) => {
   const [Icon, ButtonGroup] = remoteModules;
 
   return (
     <Space direction="vertical" className={classnames(className, style['page-header'])}>
       <Row wrap={false}>
+        {addonBefore && <Col>{addonBefore}</Col>}
         <Col flex={1} className={style['main']}>
           <Space align="start">
             {iconType && (
@@ -29,6 +30,7 @@ export const PageHeaderInner = createWithRemoteLoader({
             <ButtonGroup {...buttonOptions} />
           </Col>
         )}
+        {addonAfter && <Col>{addonAfter}</Col>}
       </Row>
       {tags && (
         <Space className={tagClassName} split={tagSplit} size={[16, 8]}>

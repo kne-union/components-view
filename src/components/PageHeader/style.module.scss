@@ -55,6 +55,12 @@
   line-height: 20px;
   font-size: 14px;
   color: var(--font-color);
+
+  :global {
+    .ant-tag {
+      margin-right: 0;
+    }
+  }
 }
 
 .tag-split {
