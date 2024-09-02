@@ -1,5 +1,5 @@
 const { PageHeaderInner } = _PageHeader;
-const { default: Space } = space;
+const { Space, Button } = antd;
 
 const api = {
   loader: () => {
@@ -17,6 +17,7 @@ const BaseExample = () => {
       <PageHeaderInner
         title="详情页名称"
         info="编号:85767"
+        addonBefore={<Button icon={'W'}></Button>}
         buttonOptionsMaxWidth={'300px'}
         buttonOptions={{
           list: [
@@ -41,6 +42,7 @@ const BaseExample = () => {
       <PageHeaderInner
         title="详情页名称非常长的情况详情页名称非常长的情况详情页名称非常长的情况详情页名称非常长的情况详情页名称非常长的情况页名称非常长的情况页名称非常长的情况"
         info="编号:85767"
+        addonBefore={<Button icon={'W'}></Button>}
         buttonOptionsMaxWidth={'300px'}
         buttonOptions={{
           list: [

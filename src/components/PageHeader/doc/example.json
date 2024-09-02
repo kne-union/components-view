@@ -11,8 +11,8 @@
           "packageName": "@components/PageHeader"
         },
         {
-          "name": "space",
-          "packageName": "antd/lib/space"
+          "name": "antd",
+          "packageName": "antd"
         }
       ]
     },
