@@ -1,0 +1,15 @@
+name: Delete Merged Branches
+on:
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - 'issue-*'
+jobs:
+  run:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: imajeetyadav/delete-merged-branches@main
+        with:
+          branch: master
