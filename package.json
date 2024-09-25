@@ -1,6 +1,6 @@
 {
   "name": "@kne-components/components-view",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "description": "展示类组件",
   "scripts": {
     "init": "husky",
