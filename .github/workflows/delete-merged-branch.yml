@@ -13,5 +13,5 @@ jobs:
       - name: Delete source branch
         run: |
           BRANCH_NAME=$(echo "${{ github.event.pull_request.head.ref }}" | tr '[:upper:]' '[:lower:]')
-          git branch -D $BRANCH_NAME
-          git push origin :$BRANCH_NAME
+          git branch -D origin/$BRANCH_NAME
+          git push origin :origin/$BRANCH_NAME
